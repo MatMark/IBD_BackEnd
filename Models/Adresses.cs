@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BackEnd.Models
+{
+    public partial class Addresses
+    {
+        public Addresses()
+        {
+        }
+
+        public int Id { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public short HomeNumber { get; set; }
+        public short? ApartmentNumber { get; set; }
+        public string PostCode { get; set; }
+    }
+}

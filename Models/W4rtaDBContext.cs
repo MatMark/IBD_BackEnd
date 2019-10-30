@@ -17,7 +17,7 @@ namespace BackEnd.Models
         {
         }
 
-        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Addresses> Addresses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,9 +29,9 @@ namespace BackEnd.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Address>(entity =>
+            modelBuilder.Entity<Addresses>(entity =>
             {
-                entity.ToTable("ADDRESS");
+                entity.ToTable("ADDRESSES");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 

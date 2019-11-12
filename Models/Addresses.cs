@@ -17,5 +17,8 @@ namespace BackEnd.Models
         public short HomeNumber { get; set; }
         public short? ApartmentNumber { get; set; }
         public string PostCode { get; set; }
+
+        //public Clients Clients { get; set; }
+        //public Transfers IdTransfersNavigation { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace BackEnd.Models
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Investments> Investments { get; set; }
         public virtual DbSet<Transfers> Transfers { get; set; }
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Loans> Loans { get; set; }
@@ -36,7 +38,9 @@ namespace BackEnd.Models
             {
                 entity.ToTable("ADDRESSES");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                .IsRequired()
+                .HasColumnName("ID");
 
                 entity.Property(e => e.ApartmentNumber).HasColumnName("APARTMENT_NUMBER");
 
@@ -55,6 +59,97 @@ namespace BackEnd.Models
                 entity.Property(e => e.Street)
                     .HasColumnName("STREET")
                     .HasColumnType("text");
+            });
+
+            modelBuilder.Entity<Clients>(entity =>
+            {
+                entity.ToTable("CLIENTS");
+
+                entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .IsRequired();
+
+                entity.Property(e => e.FirstName)
+                .HasColumnName("FIRST_NAME")
+                .IsRequired()
+                .HasColumnType("text");
+
+                entity.Property(e => e.LastName)
+               .HasColumnName("LAST_NAME")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Pesel)
+               .HasColumnName("PESEL")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Phone)
+               .HasColumnName("PHONE")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Email)
+               .HasColumnName("EMAIL")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.BirthDate)
+               .HasColumnName("BIRTH_DATE")
+               .IsRequired()
+               .HasColumnType("date");
+
+                entity.Property(e => e.Password)
+               .HasColumnName("PASSWORD")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.AddressId)
+               .HasColumnName("ADDRESS_ID")
+               .IsRequired()
+               .HasColumnType("int");
+
+
+                //entity.HasOne(d => d.Address)
+                //    .WithOne(p => p.Clients)
+                //    .HasForeignKey(d => d.AddressId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("ADDRESS_FK");
+            });
+            modelBuilder.Entity<Investments>(entity =>
+            {
+                entity.ToTable("INVESTMENTS");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .IsRequired()
+                    .HasColumnType("int");
+
+                entity.Property(e => e.Amount)
+                    .HasColumnName("AMOUNT")
+                    .IsRequired()
+                    .HasColumnType("money");
+
+                entity.Property(e => e.Interest)
+                    .HasColumnName("INTEREST")
+                    .IsRequired()
+                    .HasColumnType("real");
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnName("START_DATE")
+                    .IsRequired()
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Deadline)
+                    .HasColumnName("DEADLINE")
+                    .IsRequired()
+                    .HasColumnType("date");
+
+                entity.Property(e => e.AccountId)
+                    .HasColumnName("ACCOUNT_ID")
+                    .IsRequired()
+                    .HasColumnType("int");
+
             });
 
             modelBuilder.Entity<Transfers>(entity =>

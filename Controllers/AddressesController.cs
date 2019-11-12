@@ -49,7 +49,10 @@ namespace BackEnd.Controllers
             if (address == null)
                 return NotFound("Address couldn't be found");
             addressManager.Delete(address);
-            return NoContent();
+            address = addressManager.Get(id);
+            if (address == null)
+                return Ok(true);
+            return BadRequest(false);
         }
     }
 }

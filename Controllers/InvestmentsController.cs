@@ -53,7 +53,10 @@ namespace BackEnd.Controllers
             if (investments == null)
                 return NotFound("Investment couldn't be found");
             investmentsManager.Delete(investments);
-            return NoContent();
+            investments = investmentsManager.Get(id);
+            if (investments == null)
+                return Ok(true);
+            return BadRequest(false);
         }
 
     }

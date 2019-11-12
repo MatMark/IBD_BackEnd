@@ -49,7 +49,10 @@ namespace BackEnd.Controllers
             if (clients == null)
                 return NotFound("Client couldn't be found");
             clientsManager.Delete(clients);
-            return NoContent();
+            clients = clientsManager.Get(id);
+            if (clients == null)
+                return Ok(true);
+            return BadRequest(false);
         }
     }
 }

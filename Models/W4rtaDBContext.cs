@@ -18,6 +18,9 @@ namespace BackEnd.Models
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
+        public virtual DbSet<Transfers> Transfers { get; set; }
+        public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Loans> Loans { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,6 +56,110 @@ namespace BackEnd.Models
                     .HasColumnName("STREET")
                     .HasColumnType("text");
             });
+
+            modelBuilder.Entity<Transfers>(entity =>
+            {
+                entity.ToTable("TRANSFERS");
+
+                entity.Property(e => e.ID)
+                    .HasColumnName("ID")
+                    .HasColumnType("int")
+                    .IsRequired();
+
+                entity.Property(e => e.Time)
+                    .IsRequired()
+                    .HasColumnName("TIME")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Amount)
+                    .IsRequired()
+                    .HasColumnName("AMOUNT")
+                    .HasColumnType("money");
+
+                entity.Property(e => e.Destination)
+                    .IsRequired()
+                    .HasColumnName("DESTINATION")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("TITLE")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.AddressId)
+                    .HasColumnName("ADDRESS_ID")
+                    .HasColumnType("int");
+
+                entity.Property(e => e.AccountId)
+                    .IsRequired()
+                    .HasColumnName("ACCOUNT_ID")
+                    .HasColumnType("int");
+
+                entity.Property(e => e.Currency)
+                    .IsRequired()
+                    .HasColumnName("CURRENCY")
+                    .HasColumnType("text");     
+            });
+
+            modelBuilder.Entity<Accounts>(entity =>
+            {
+                entity.ToTable("ACCOUNTS");
+
+                entity.Property(e => e.ID)
+                    .IsRequired()
+                    .HasColumnName("ID")
+                    .HasColumnType("int");
+
+                entity.Property(e => e.Number)
+                    .IsRequired()
+                    .HasColumnName("NUMBER")
+                    .HasColumnType("text");
+
+                entity.Property(e => e.Balance)
+                    .IsRequired()
+                    .HasColumnName("BALANCE")
+                    .HasColumnType("money");
+
+                entity.Property(e => e.ClientId)
+                    .IsRequired()
+                    .HasColumnName("CLIENT_ID")
+                    .HasColumnType("int");
+            });
+            modelBuilder.Entity<Loans>(entity =>
+            {
+                entity.ToTable("LOANS");
+
+                entity.Property(e => e.ID)
+                    .IsRequired()
+                    .HasColumnName("ID")
+                    .HasColumnType("int");
+
+                entity.Property(e => e.Amount)
+                    .IsRequired()
+                    .HasColumnName("AMOUNT")
+                    .HasColumnType("money");
+
+                entity.Property(e => e.Interest)
+                    .IsRequired()
+                    .HasColumnName("INTEREST")
+                    .HasColumnType("double");
+
+                entity.Property(e => e.StartDate)
+                    .IsRequired()
+                    .HasColumnName("START_DATE")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Deadline)
+                    .IsRequired()
+                    .HasColumnName("DEADLINE")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.AccountId)
+                    .IsRequired()
+                    .HasColumnName("ACCOUNT_ID")
+                    .HasColumnType("int");
+            });
+
 
         }
     }

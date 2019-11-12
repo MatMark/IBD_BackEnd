@@ -19,6 +19,7 @@ namespace BackEnd.Models
 
         public virtual DbSet<Addresses> Addresses { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Investments> Investments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -112,6 +113,42 @@ namespace BackEnd.Models
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("ADDRESS_FK");
             });
+            modelBuilder.Entity<Investments>(entity =>
+            {
+                entity.ToTable("INVESTMENTS");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .IsRequired()
+                    .HasColumnType("int");
+
+                entity.Property(e => e.Amount)
+                    .HasColumnName("AMOUNT")
+                    .IsRequired()
+                    .HasColumnType("money");
+
+                entity.Property(e => e.Interest)
+                    .HasColumnName("INTEREST")
+                    .IsRequired()
+                    .HasColumnType("real");
+
+                entity.Property(e => e.StartDate)
+                    .HasColumnName("START_DATE")
+                    .IsRequired()
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Deadline)
+                    .HasColumnName("DEADLINE")
+                    .IsRequired()
+                    .HasColumnType("date");
+
+                entity.Property(e => e.AccountId)
+                    .HasColumnName("ACCOUNT_ID")
+                    .IsRequired()
+                    .HasColumnType("int");
+
+            });
+
         }
     }
 }

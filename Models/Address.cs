@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public partial class Addresses
+    public partial class Address
     {
-        public Addresses()
+        public Address()
         {
         }
 

@@ -1,12 +1,12 @@
 ﻿using System;
 namespace BackEnd.Models
 {
-    public partial class Loans
+    public partial class Loan
     {
-        public Loans()
+        public Loan()
         {
         }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public float Amount { get; set; }
         public float Interest { get; set; }
         public DateTime StartDate { get; set; }

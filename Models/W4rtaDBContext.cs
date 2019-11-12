@@ -17,12 +17,12 @@ namespace BackEnd.Models
         {
         }
 
-        public virtual DbSet<Addresses> Addresses { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<Investments> Investments { get; set; }
-        public virtual DbSet<Transfers> Transfers { get; set; }
-        public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<Loans> Loans { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Investment> Investment { get; set; }
+        public virtual DbSet<Transfer> Transfer { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<Loan> Loan { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,7 +34,7 @@ namespace BackEnd.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Addresses>(entity =>
+            modelBuilder.Entity<Address>(entity =>
             {
                 entity.ToTable("ADDRESSES");
 
@@ -61,7 +61,7 @@ namespace BackEnd.Models
                     .HasColumnType("text");
             });
 
-            modelBuilder.Entity<Clients>(entity =>
+            modelBuilder.Entity<Client>(entity =>
             {
                 entity.ToTable("CLIENTS");
 
@@ -116,7 +116,7 @@ namespace BackEnd.Models
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("ADDRESS_FK");
             });
-            modelBuilder.Entity<Investments>(entity =>
+            modelBuilder.Entity<Investment>(entity =>
             {
                 entity.ToTable("INVESTMENTS");
 
@@ -152,11 +152,11 @@ namespace BackEnd.Models
 
             });
 
-            modelBuilder.Entity<Transfers>(entity =>
+            modelBuilder.Entity<Transfer>(entity =>
             {
                 entity.ToTable("TRANSFERS");
 
-                entity.Property(e => e.ID)
+                entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .HasColumnType("int")
                     .IsRequired();
@@ -196,11 +196,11 @@ namespace BackEnd.Models
                     .HasColumnType("text");     
             });
 
-            modelBuilder.Entity<Accounts>(entity =>
+            modelBuilder.Entity<Account>(entity =>
             {
                 entity.ToTable("ACCOUNTS");
 
-                entity.Property(e => e.ID)
+                entity.Property(e => e.Id)
                     .IsRequired()
                     .HasColumnName("ID")
                     .HasColumnType("int");
@@ -220,11 +220,11 @@ namespace BackEnd.Models
                     .HasColumnName("CLIENT_ID")
                     .HasColumnType("int");
             });
-            modelBuilder.Entity<Loans>(entity =>
+            modelBuilder.Entity<Loan>(entity =>
             {
                 entity.ToTable("LOANS");
 
-                entity.Property(e => e.ID)
+                entity.Property(e => e.Id)
                     .IsRequired()
                     .HasColumnName("ID")
                     .HasColumnType("int");

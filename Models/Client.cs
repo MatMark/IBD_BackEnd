@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public partial class Clients
+    public partial class Client
     {
-        public Clients()
+        public Client()
         {
         }
 

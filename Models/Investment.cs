@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BackEnd.Models
 {
-    public class Investments
+    public class Investment
     {
-        public Investments()
+        public Investment()
         {
 
         }

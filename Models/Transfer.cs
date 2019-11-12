@@ -1,12 +1,12 @@
 ﻿using System;
 namespace BackEnd.Models
 {
-    public partial class Transfers
+    public partial class Transfer
     {
-        public Transfers()
+        public Transfer()
         {
         }
-        public int ID { get; set; }
+        public int Id { get; set; }
         public DateTime Time { get; set; }
         public float Amount { get; set; }
         public string Destination { get; set; }

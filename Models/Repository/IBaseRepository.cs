@@ -13,8 +13,8 @@ namespace BackEnd.Models.Repository
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll();
         int Count();
-        void Add(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(TEntity entity);
+        int Add(TEntity entity);
+        int Update(TEntity entity);
+        int Delete(TEntity entity);
     }
 }

@@ -41,7 +41,7 @@ namespace BackEnd.Controllers
         {
             if (investments == null)
             {
-                return BadRequest("Address is null");
+                return BadRequest("Investment is null");
             }
             investmentsManager.Add(investments);
             return Ok(investments.Id);
@@ -51,7 +51,7 @@ namespace BackEnd.Controllers
         {
             Investments investments = investmentsManager.Get(id);
             if (investments == null)
-                return NotFound("Address couldn't be found");
+                return NotFound("Investment couldn't be found");
             investmentsManager.Delete(investments);
             return NoContent();
         }

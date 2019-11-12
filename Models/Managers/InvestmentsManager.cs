@@ -24,17 +24,18 @@ namespace BackEnd.Models.Managers
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return context.Set<Investments>().Count();
         }
 
         public void Delete(Investments entity)
         {
-            throw new NotImplementedException();
+            context.Remove(entity);
+            context.SaveChanges();
         }
 
         public Investments Get(int id)
         {
-            throw new NotImplementedException();
+            return context.Investments.FirstOrDefault(e => e.Id == id);
         }
 
         public Investments Get(string id)
@@ -44,17 +45,18 @@ namespace BackEnd.Models.Managers
 
         public Investments Get(Expression<Func<Investments, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return context.Investments.FirstOrDefault(predicate);
         }
 
         public IEnumerable<Investments> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Investments.ToList();
         }
 
         public void Update(Investments entity)
         {
-            throw new NotImplementedException();
+            context.Investments.Update(entity);
+            context.SaveChanges();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BackEnd.Models
         }
 
         public int Id { get; set; }
-        public double Amount { get; set; }
+        public float Amount { get; set; }
         public float Interest { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime Deadline { get; set; }

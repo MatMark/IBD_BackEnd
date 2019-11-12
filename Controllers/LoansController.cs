@@ -47,7 +47,10 @@ namespace BackEnd.Controllers
             if (loans == null)
                 return NotFound("Loan couldn't be found");
             loansManager.Delete(loans);
-            return NoContent();
+            loans = loansManager.Get(id);
+            if (loans == null)
+                return Ok(true);
+            return BadRequest(false);
         }
     }
 }

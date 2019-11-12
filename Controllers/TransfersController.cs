@@ -47,7 +47,10 @@ namespace BackEnd.Controllers
             if (transfers == null)
                 return NotFound("Transfer couldn't be found");
             transfersManager.Delete(transfers);
-            return NoContent();
+            transfers = transfersManager.Get(id);
+            if (transfers == null)
+                return Ok(true);
+            return BadRequest(false);
         }
     }
 }

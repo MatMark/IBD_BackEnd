@@ -47,7 +47,10 @@ namespace BackEnd.Controllers
             if (accounts == null)
                 return NotFound("Account couldn't be found");
             accountsManager.Delete(accounts);
-            return NoContent();
+            accounts = accountsManager.Get(id);
+            if (accounts == null)
+                return Ok(true);
+            return BadRequest(false);
         }
     }
 }

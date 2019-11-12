@@ -78,7 +78,7 @@ namespace BackEnd.Models
 
                 entity.Property(e => e.Destination)
                     .IsRequired()
-                    .HasColumnName("DESTINATION")
+                    .HasColumnName("DESTINATION_ACCOUNT_NUMBER")
                     .HasColumnType("text");
 
                 entity.Property(e => e.Title)

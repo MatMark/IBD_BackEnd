@@ -18,6 +18,7 @@ namespace BackEnd.Models
         }
 
         public virtual DbSet<Addresses> Addresses { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,7 +34,9 @@ namespace BackEnd.Models
             {
                 entity.ToTable("ADDRESSES");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                .IsRequired()
+                .HasColumnName("ID");
 
                 entity.Property(e => e.ApartmentNumber).HasColumnName("APARTMENT_NUMBER");
 
@@ -54,6 +57,61 @@ namespace BackEnd.Models
                     .HasColumnType("text");
             });
 
+            modelBuilder.Entity<Clients>(entity =>
+            {
+                entity.ToTable("CLIENTS");
+
+                entity.Property(e => e.Id)
+                .HasColumnName("ID")
+                .IsRequired();
+
+                entity.Property(e => e.FirstName)
+                .HasColumnName("FIRST_NAME")
+                .IsRequired()
+                .HasColumnType("text");
+
+                entity.Property(e => e.LastName)
+               .HasColumnName("LAST_NAME")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Pesel)
+               .HasColumnName("PESEL")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Phone)
+               .HasColumnName("PHONE")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.Email)
+               .HasColumnName("EMAIL")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.BirthDate)
+               .HasColumnName("BIRTH_DATE")
+               .IsRequired()
+               .HasColumnType("date");
+
+                entity.Property(e => e.Password)
+               .HasColumnName("PASSWORD")
+               .IsRequired()
+               .HasColumnType("text");
+
+                entity.Property(e => e.AddressId)
+               .HasColumnName("ADDRESS_ID")
+               .IsRequired()
+               .HasColumnType("int");
+
+
+                //entity.HasOne(d => d.Address)
+                //    .WithOne(p => p.Clients)
+                //    .HasForeignKey(d => d.AddressId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("ADDRESS_FK");
+            });
         }
     }
 }

@@ -12,12 +12,14 @@ namespace BackEnd.Controllers
     public class InvestmentsController : Controller
     {
         private W4rtaDBContext context;
-        //TODO InvestmentsManager
+        InvestmentsManager investmentsManager;
 
-        public AddressesController(W4rtaDBContext context)
+        public InvestmentsController(W4rtaDBContext context)
         {
             this.context = context;
-            //TODO InvestmentsManager
+            investmentsManager = new InvestmentsManager(this.context);
         }
+
+
     }
 }

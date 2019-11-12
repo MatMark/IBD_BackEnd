@@ -11,7 +11,7 @@ namespace BackEnd.Models
         public float Amount { get; set; }
         public string Destination { get; set; }
         public string Title { get; set; }
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public int AccountId { get; set; }
         public string Currency { get; set; }
 

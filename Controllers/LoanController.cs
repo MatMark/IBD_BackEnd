@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
@@ -17,12 +18,14 @@ namespace BackEnd.Controllers
             loanManager = new LoanManager(this.context);
         }
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             IEnumerable<Loan> loan = loanManager.GetAll();
             return Ok(loan);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             Loan loan = loanManager.Get(id);
@@ -31,6 +34,7 @@ namespace BackEnd.Controllers
             return Ok(loan);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] Loan loan)
         {
             if (loan == null)
@@ -47,6 +51,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpDelete]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             Loan loan = loanManager.Get(id);
@@ -63,6 +68,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult Put([FromBody] Loan loan)
         {
             if (loanManager.Update(loan) == 1)

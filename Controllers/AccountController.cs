@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
@@ -15,14 +16,16 @@ namespace BackEnd.Controllers
         {
             this.context = context;
             accountManager = new AccountManager(this.context);
-    }
+        }
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             IEnumerable<Account> account = accountManager.GetAll();
             return Ok(account);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             Account account = accountManager.Get(id);
@@ -31,6 +34,7 @@ namespace BackEnd.Controllers
             return Ok(account);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] Account account)
         {
             if (account == null)
@@ -47,6 +51,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpDelete]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             Account account = accountManager.Get(id);
@@ -62,6 +67,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Put([FromBody] Account account)
         {
             if (accountManager.Update(account) == 1)

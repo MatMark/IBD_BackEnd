@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
@@ -21,6 +22,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             IEnumerable<Investment> investment = investmentManager.GetAll();
@@ -28,6 +30,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             Investment investment = investmentManager.Get(id);
@@ -37,6 +40,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] Investment investment)
         {
             if (investment == null)
@@ -53,6 +57,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpDelete]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             Investment investment = investmentManager.Get(id);
@@ -68,6 +73,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Put([FromBody] Investment investment)
         {
             if (investmentManager.Update(investment) == 1)

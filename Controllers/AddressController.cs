@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
@@ -21,12 +22,14 @@ namespace BackEnd.Controllers
             addressManager = new AddressManager(this.context);
         }
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             IEnumerable<Address> address = addressManager.GetAll();
             return Ok(address);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             Address address = addressManager.Get(id);
@@ -35,6 +38,7 @@ namespace BackEnd.Controllers
             return Ok(address);
         }
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] Address address)
         {
             if (address == null)
@@ -51,6 +55,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpDelete]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             Address address = addressManager.Get(id);
@@ -66,6 +71,7 @@ namespace BackEnd.Controllers
             }
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Put([FromBody] Address address)
         {
             if (addressManager.Update(address) == 1)

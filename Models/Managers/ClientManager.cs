@@ -39,9 +39,9 @@ namespace BackEnd.Models.Managers
             return context.Client.FirstOrDefault(e => e.Id == id);
         }
 
-        public Client Get(string id)
+        public Client Get(string email)
         {
-            throw new NotImplementedException();
+            return context.Client.FirstOrDefault(e => e.Email == email);
         }
 
         public Client Get(Expression<Func<Client, bool>> predicate)

@@ -67,13 +67,9 @@ namespace BackEnd.Controllers
                 return BadRequest(false);
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Investment investment)
+        [HttpPut]
+        public IActionResult Put([FromBody] Investment investment)
         {
-            if (id != investment.Id)
-            {
-                return BadRequest();
-            }
             if (investmentManager.Update(investment) == 1)
             {
                 return Ok(true);

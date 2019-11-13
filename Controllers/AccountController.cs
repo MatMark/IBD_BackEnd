@@ -61,13 +61,9 @@ namespace BackEnd.Controllers
                 return BadRequest(false);
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Account account)
+        [HttpPut]
+        public IActionResult Put([FromBody] Account account)
         {
-            if (id != account.Id)
-            {
-                return BadRequest();
-            }
             if (accountManager.Update(account) == 1)
             {
                 return Ok(true);

@@ -62,13 +62,9 @@ namespace BackEnd.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Loan loan)
+        [HttpPut]
+        public IActionResult Put([FromBody] Loan loan)
         {
-            if (id != loan.Id)
-            {
-                return BadRequest();
-            }
             if (loanManager.Update(loan) == 1)
             {
                 return Ok(true);

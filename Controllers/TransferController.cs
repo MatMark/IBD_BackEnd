@@ -61,13 +61,9 @@ namespace BackEnd.Controllers
                 return BadRequest(false);
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Transfer transfer)
+        [HttpPut]
+        public IActionResult Put([FromBody] Transfer transfer)
         {
-            if (id != transfer.Id)
-            {
-                return BadRequest();
-            }
             if (transferManager.Update(transfer) == 1)
             {
                 return Ok(true);

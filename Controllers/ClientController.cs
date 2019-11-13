@@ -63,13 +63,9 @@ namespace BackEnd.Controllers
                 return BadRequest(false);
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, Client client)
+        [HttpPut]
+        public IActionResult Put([FromBody] Client client)
         {
-            if (id != client.Id)
-            {
-                return BadRequest();
-            }
             if (clientManager.Update(client) == 1)
             {
                 return Ok(true);

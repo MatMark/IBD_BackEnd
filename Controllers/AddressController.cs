@@ -65,13 +65,9 @@ namespace BackEnd.Controllers
                 return BadRequest(false);
             }
         }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Address address)
+        [HttpPut]
+        public IActionResult Put([FromBody] Address address)
         {
-            if (id != address.Id)
-            {
-                return BadRequest();
-            }
             if (addressManager.Update(address) == 1)
             {
                 return Ok(true);

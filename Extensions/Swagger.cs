@@ -25,7 +25,7 @@ namespace BackEnd.Extensions
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                //c.SwaggerEndpoint("/swagger/v1/swagger.json", "W4rta V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "W4rta v1");
             });
 
             return app;

@@ -26,7 +26,7 @@ namespace BackEnd.Authentication
         [HttpPost]
         public IActionResult Register([FromBody]Client registerRequest)
         {
-            if (registerRequest == null) return BadRequest("Client is null");
+            if (registerRequest == null) return BadRequest(new { error = "Client is null" });
 
             byte[] salt = Encoding.UTF8.GetBytes(registerRequest.Email);
             string hashedPassword = PasswordHasher.Hash(salt, registerRequest.Password);

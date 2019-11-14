@@ -40,7 +40,7 @@ namespace BackEnd.Authentication
                 var tokenString = GenerateJSONWebToken(user);
                 response = Ok(new { token = tokenString });
             }
-            else response = BadRequest("Bad login or password");
+            else response = BadRequest(new { error = "bad login or password" });
 
             return response;
         }

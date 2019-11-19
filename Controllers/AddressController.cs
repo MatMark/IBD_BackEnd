@@ -38,7 +38,6 @@ namespace BackEnd.Controllers
             return Ok(address);
         }
         [HttpPost]
-        [Authorize]
         public IActionResult Post([FromBody] Address address)
         {
             if (address == null)
@@ -47,7 +46,7 @@ namespace BackEnd.Controllers
             }
             if (addressManager.Add(address) == 1)
             {
-                return Ok(true);
+                return Ok(address.Id);
             }
             else
             {

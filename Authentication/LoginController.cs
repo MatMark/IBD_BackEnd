@@ -40,7 +40,7 @@ namespace BackEnd.Authentication
                 var tokenString = GenerateJSONWebToken(user);
                 response = Ok(new { token = tokenString });
             }
-            else response = BadRequest(new { error = "bad login or password" });
+            else response = BadRequest(new { error = "Bad login or password" });
 
             return response;
         }
@@ -49,15 +49,15 @@ namespace BackEnd.Authentication
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
+            
             var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Email, userInfo.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.NameId, userInfo.Id.ToString()),
+            //new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Issuer"],
-              null,
+              claims,
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
 

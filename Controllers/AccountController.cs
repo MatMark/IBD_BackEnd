@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,15 @@ namespace BackEnd.Controllers
                 return NotFound("Account couldn't be found");
             return Ok(account);
         }
+
+        [HttpGet("client_accounts/{clientId}")]
+        [Authorize]
+        public IActionResult GetClientAccounts(int clientId)
+        {
+            IEnumerable<Account> accounts = accountManager.GetAll().Where(e => e.ClientId == clientId);
+            return Ok(accounts);
+        }
+
         [HttpPost]
         [Authorize]
         public IActionResult Post([FromBody] Account account)

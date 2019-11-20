@@ -109,12 +109,11 @@ namespace BackEnd.Models
                .IsRequired()
                .HasColumnType("int");
 
-
-                entity.HasOne(d => d.Address) //zakladamy, że jest dobrze :)
+                entity.HasOne(d => d.Address)
                     .WithOne(p => p.Client)
                     .HasForeignKey<Client>(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("ADDRESS_ID");
             });
             modelBuilder.Entity<Investment>(entity =>
             {
@@ -154,7 +153,7 @@ namespace BackEnd.Models
                     .WithMany(d => d.Investments)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("ACCOUNT_ID");
 
             });
 
@@ -191,13 +190,13 @@ namespace BackEnd.Models
                     .WithOne(d => d.Transfer)
                     .HasForeignKey<Transfer>(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("ADDRESS_ID");
 
                 entity.HasOne(e => e.Account)
                     .WithMany(d => d.Transfers)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("ACCOUNT_ID");
 
                 entity.Property(e => e.AccountId)
                     .IsRequired()
@@ -238,7 +237,7 @@ namespace BackEnd.Models
                     .WithMany(d => d.Accounts)
                     .HasForeignKey(d => d.ClientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("CLIENT_ID");
 
             });
             modelBuilder.Entity<Loan>(entity =>
@@ -279,7 +278,7 @@ namespace BackEnd.Models
                     .WithMany(d => d.Loans)
                     .HasForeignKey(d => d.AccountId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ID");
+                    .HasConstraintName("ACCOUNT_ID");
             });
 
 

@@ -35,9 +35,9 @@ namespace BackEnd.Controllers
             return Ok(account);
         }
 
-        [HttpGet("client_accounts/{clientId}")]
+        [HttpPost("client_accounts")]
         [Authorize]
-        public IActionResult GetClientAccounts(int clientId)
+        public IActionResult GetClientAccounts([FromBody] int clientId)
         {
             IEnumerable<Account> accounts = accountManager.GetAll().Where(e => e.ClientId == clientId);
             return Ok(accounts);

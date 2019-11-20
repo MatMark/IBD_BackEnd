@@ -110,11 +110,11 @@ namespace BackEnd.Models
                .HasColumnType("int");
 
 
-                //entity.HasOne(d => d.Address)
-                //    .WithOne(p => p.Clients)
-                //    .HasForeignKey(d => d.AddressId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("ADDRESS_FK");
+                entity.HasOne(d => d.Address) //zakladamy, że jest dobrze :)
+                    .WithOne(p => p.Client)
+                    .HasForeignKey<Client>(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
             });
             modelBuilder.Entity<Investment>(entity =>
             {
@@ -150,6 +150,12 @@ namespace BackEnd.Models
                     .IsRequired()
                     .HasColumnType("int");
 
+                entity.HasOne(e => e.Account)
+                    .WithMany(d => d.Investments)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
+
             });
 
             modelBuilder.Entity<Transfer>(entity =>
@@ -181,9 +187,17 @@ namespace BackEnd.Models
                     .HasColumnName("TITLE")
                     .HasColumnType("text");
 
-                entity.Property(e => e.AddressId)
-                    .HasColumnName("ADDRESS_ID")
-                    .HasColumnType("int");
+                entity.HasOne(e => e.Address)
+                    .WithOne(d => d.Transfer)
+                    .HasForeignKey<Transfer>(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
+
+                entity.HasOne(e => e.Account)
+                    .WithMany(d => d.Transfers)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
 
                 entity.Property(e => e.AccountId)
                     .IsRequired()
@@ -219,6 +233,13 @@ namespace BackEnd.Models
                     .IsRequired()
                     .HasColumnName("CLIENT_ID")
                     .HasColumnType("int");
+
+                entity.HasOne(e => e.Client)
+                    .WithMany(d => d.Accounts)
+                    .HasForeignKey(d => d.ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
+
             });
             modelBuilder.Entity<Loan>(entity =>
             {
@@ -253,6 +274,12 @@ namespace BackEnd.Models
                     .IsRequired()
                     .HasColumnName("ACCOUNT_ID")
                     .HasColumnType("int");
+
+                entity.HasOne(e => e.Account)
+                    .WithMany(d => d.Loans)
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ID");
             });
 
 

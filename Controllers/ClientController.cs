@@ -35,15 +35,15 @@ namespace BackEnd.Controllers
                 return NotFound("Client couldn't be found");
             return Ok(client);
         }
-        [HttpGet("{email}")]
-        [Authorize]
-        public IActionResult Get(string email)
-        {
-            Client client = clientManager.Get(email);
-            if (client == null)
-                return NotFound("Client couldn't be found");
-            return Ok(client);
-        }
+        //[HttpGet("{email}")]
+        //[Authorize]
+        //public IActionResult Get(string email)
+        //{
+        //    Client client = clientManager.Get(email);
+        //    if (client == null)
+        //        return NotFound("Client couldn't be found");
+        //    return Ok(client);
+        //}
         [HttpPost]
         [Authorize]
         public IActionResult Post([FromBody] Client client)

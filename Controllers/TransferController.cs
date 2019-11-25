@@ -41,6 +41,13 @@ namespace BackEnd.Controllers
             IEnumerable<Transfer> transfers = transferManager.GetAll().Where(e => e.AccountId == accountId);
             return Ok(transfers);
         }
+        [HttpGet("by_destination/{destination}")]
+        [Authorize]
+        public IActionResult GetByAccountId(string destination)
+        {
+            IEnumerable<Transfer> transfers = transferManager.GetAll().Where(e => e.Destination == destination);
+            return Ok(transfers);
+        }
         [HttpPost]
         [Authorize]
         public IActionResult Post([FromBody] Transfer transfer)

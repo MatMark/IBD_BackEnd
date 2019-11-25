@@ -36,7 +36,7 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet("by_number/{number}")]
-        //[Authorize]
+        [Authorize]
         public IActionResult GetByNumber(string number)
         {
             Account account = accountManager.Get(number);

@@ -14,9 +14,5 @@ namespace BackEnd.Models
         public int? AddressId { get; set; }
         public int AccountId { get; set; }
         public string Currency { get; set; }
-
-        public Address Address { get; set; }
-        public Account Account { get; set; }
-
     }
 }

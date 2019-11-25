@@ -186,21 +186,14 @@ namespace BackEnd.Models
                     .HasColumnName("TITLE")
                     .HasColumnType("text");
 
-                entity.HasOne(e => e.Address)
-                    .WithOne(d => d.Transfer)
-                    .HasForeignKey<Transfer>(d => d.AddressId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ADDRESS_ID");
-
-                entity.HasOne(e => e.Account)
-                    .WithMany(d => d.Transfers)
-                    .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ACCOUNT_ID");
-
                 entity.Property(e => e.AccountId)
                     .IsRequired()
                     .HasColumnName("ACCOUNT_ID")
+                    .HasColumnType("int");
+
+                entity.Property(e => e.AddressId)
+                    .IsRequired()
+                    .HasColumnName("ADDRESS_ID")
                     .HasColumnType("int");
 
                 entity.Property(e => e.Currency)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BackEnd.Models;
 using BackEnd.Models.Managers;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +33,13 @@ namespace BackEnd.Controllers
             if (transfer == null)
                 return NotFound("Transfer couldn't be found");
             return Ok(transfer);
+        }
+        [HttpGet("by_account_id/{accountId}")]
+        [Authorize]
+        public IActionResult GetByAccountId(int accountId)
+        {
+            IEnumerable<Transfer> transfers = transferManager.GetAll().Where(e => e.AccountId == accountId);
+            return Ok(transfers);
         }
         [HttpPost]
         [Authorize]

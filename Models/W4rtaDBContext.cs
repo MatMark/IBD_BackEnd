@@ -168,8 +168,7 @@ namespace BackEnd.Models
 
                 entity.Property(e => e.Time)
                     .IsRequired()
-                    .HasColumnName("TIME")
-                    .HasColumnType("date");
+                    .HasColumnName("TIME");
 
                 entity.Property(e => e.Amount)
                     .IsRequired()

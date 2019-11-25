@@ -36,9 +36,9 @@ namespace BackEnd.Models.Managers
             return context.Account.FirstOrDefault(e => e.Id == id);
         }
 
-        public Account Get(string id)
+        public Account Get(string number)
         {
-            throw new NotImplementedException();
+            return context.Account.FirstOrDefault(e => e.Number == number);
         }
 
         public Account Get(Expression<Func<Account, bool>> predicate)

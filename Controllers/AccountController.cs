@@ -35,6 +35,16 @@ namespace BackEnd.Controllers
             return Ok(account);
         }
 
+        [HttpGet("by_number/{number}")]
+        //[Authorize]
+        public IActionResult GetByNumber(string number)
+        {
+            Account account = accountManager.Get(number);
+            if (account == null)
+                return NotFound("Account couldn't be found");
+            return Ok(account);
+        }
+
         [HttpPost("client_accounts")]
         [Authorize]
         public IActionResult GetClientAccounts([FromBody] int clientId)

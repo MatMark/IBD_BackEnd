@@ -55,15 +55,22 @@ namespace BackEnd.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Post([FromBody] Account account)
+        public IActionResult Post([FromBody] int clientId)
         {
-            if (account == null)
-            {
-                return BadRequest("Account is null");
-            }
+            Account account = new Account();
+            account.ClientId = clientId;
+            account.Balance = 0;
+            String startWith = "PL";
+            Random generator = new Random();
+            String one = generator.Next(100000000, 999999999).ToString("D6");
+            String two = generator.Next(100000000, 999999999).ToString("D6");
+            String three = generator.Next(10000000, 99999999).ToString("D6");
+            String accountNumber = startWith + one + two + three;
+            account.Number = accountNumber;
+
             if (accountManager.Add(account) == 1)
             {
-                return Ok(true);
+                return Ok(account);
             }
             else
             {

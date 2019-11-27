@@ -21,8 +21,5 @@ namespace BackEnd.Models
         public string Password { get; set; }
         public int AddressId { get; set; }
 
-        public Address Address { get; set; }
-        public ICollection<Account> Accounts{ get; set; }
-
     }
 }

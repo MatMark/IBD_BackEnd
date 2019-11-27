@@ -13,6 +13,5 @@ namespace BackEnd.Models
         public DateTime Deadline { get; set; }
         public int AccountId { get; set; }
 
-        public Account Account { get; set; }
     }
 }

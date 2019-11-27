@@ -13,10 +13,13 @@ namespace BackEnd.Controllers
     {
         private W4rtaDBContext context;
         private TransferManager transferManager;
+        private AccountManager accountManager;
+
         public TransferController(W4rtaDBContext context)
         {
             this.context = context;
             transferManager = new TransferManager(this.context);
+            accountManager = new AccountManager(this.context);
         }
         [HttpGet]
         [Authorize]
@@ -63,6 +66,36 @@ namespace BackEnd.Controllers
             else
             {
                 return BadRequest(false);
+            }
+        }
+        [HttpPost("make_transfer")]
+        [Authorize]
+        public IActionResult MakeTransfer([FromBody] Transfer transfer)
+        {
+            if (transfer == null) return BadRequest("Transfer is null");
+
+
+            Account srcAccount = accountManager.Get(transfer.AccountId);
+
+            if (srcAccount == null) return BadRequest("Bad source account");
+
+            Account dstAccount = accountManager.Get(transfer.Destination);
+
+            if (dstAccount == null) return BadRequest("Bad destination account");
+
+            if (srcAccount.Balance < transfer.Amount) return BadRequest("Not enought money");
+
+            if (transferManager.Add(transfer) == 1)
+            {
+                srcAccount.Balance -= transfer.Amount;
+                dstAccount.Balance += transfer.Amount;
+                accountManager.Update(srcAccount);
+                accountManager.Update(dstAccount);
+                return Ok(true);
+            }
+            else
+            {
+                return BadRequest("Unknown error");
             }
         }
         [HttpDelete]

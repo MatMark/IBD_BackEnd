@@ -74,23 +74,23 @@ namespace BackEnd.Controllers
         {
             if (transfer == null) return BadRequest("Transfer is null");
 
-
             Account srcAccount = accountManager.Get(transfer.AccountId);
 
             if (srcAccount == null) return BadRequest("Bad source account");
 
             Account dstAccount = accountManager.Get(transfer.Destination);
 
-            if (dstAccount == null) return BadRequest("Bad destination account");
-
             if (srcAccount.Balance < transfer.Amount) return BadRequest("Not enought money");
 
             if (transferManager.Add(transfer) == 1)
             {
                 srcAccount.Balance -= transfer.Amount;
-                dstAccount.Balance += transfer.Amount;
                 accountManager.Update(srcAccount);
-                accountManager.Update(dstAccount);
+                if (dstAccount != null)
+                {
+                    dstAccount.Balance += transfer.Amount;
+                    accountManager.Update(dstAccount);
+                }
                 return Ok(true);
             }
             else
